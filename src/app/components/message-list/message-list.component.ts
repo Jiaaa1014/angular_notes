@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, C
 import { MessageComponent } from '../message/message.component'
 @Component({
   selector: 'app-message-list',
-  templateUrl: './message-list.component.html',
-  styleUrls: ['./message-list.component.css']
+  templateUrl: './message-list.component.html'
 })
 export class MessageListComponent implements OnInit, AfterViewInit {
 

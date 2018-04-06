@@ -3,7 +3,6 @@ import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } 
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
-  styleUrls: ['./child.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChildComponent implements OnInit {
