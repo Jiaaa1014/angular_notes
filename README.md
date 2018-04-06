@@ -1,10 +1,42 @@
-# AngularNew
+## Change Detection
+`child.component.ts`
+[這篇寫得很清楚](https://blog.kevinyang.net/2017/01/23/angular2-change-detection/)
+[這篇也是，看例子](https://blog.kevinyang.net/2017/08/09/angular-changedetector-markforcheck/)
+```js
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default
+})
+export class ChildComponent implements OnInit {
+  @Input() user: { name: string }
+  constructor(private chRef: ChangeDetectorRef) { }
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+  ngOnInit() {
+    this.chRef.detectChanges()
+  }
+}
+```
+* `changeDetection: ChangeDetectionStrategy.Default`
+改變屬性或是改變物件都可以
+* `changeDetection: ChangeDetectionStrategy.OnPush`
+只能透過改變物件，只關注被標記`@Input`的東西
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* `ChangeDetectorRef`只能意會不能言傳
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Code scaffolding
 
@@ -22,6 +54,3 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

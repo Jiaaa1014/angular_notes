@@ -1,3 +1,5 @@
-<p>
-  parent works!
-</p>
+<div style="border:2px #eee solid; padding:10px;">
+  <app-child [user]="user"></app-child>
+  <button class="btn btn-secondary" (click)="changeProperty()">改變屬性</button>
+  <button class="btn btn-secondary" (click)="changeObject()">改變物件</button>
+</div>

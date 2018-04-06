@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
-  styleUrls: ['./child.component.css']
+  styleUrls: ['./child.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChildComponent implements OnInit {
-
-  constructor() { }
+  @Input() user: { name: string }
+  constructor(private chRef: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.chRef.detectChanges()
   }
-
 }
