@@ -3,7 +3,7 @@ import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } 
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class ChildComponent implements OnInit {
   @Input() user: { name: string }
