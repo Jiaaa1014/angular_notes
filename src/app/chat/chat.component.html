@@ -1,0 +1,22 @@
+<div style="border:2px #eee solid; padding:10px;">
+  <div>
+    <p>{{stringInterpolation}}</p>
+  </div>
+  <hr>
+  <div>
+    <input class="form-control" type="text" [value]="stringPropertyBinding" />
+  </div>
+  <hr>
+  <div>
+    <button class="btn btn-default" (click)="onSubmitClick()">事件綁定</button>
+  </div>
+  <hr>
+  <div class="row container">
+    <p class="col-12">使用
+      <code>[(ngModel)</code>]在`app.module.ts`要引入FormsModule</p>
+    <input class="form-control col-sm-12 col-md-6" type="text" [(ngModel)]="stringTwoWayBinding" />
+    <br>
+    <input class="form-control  col-sm-12 col-md-6" type="text" [(ngModel)]="stringTwoWayBinding" />
+    <!-- <p>{{stringTwoWayBinding}}</p> -->
+  </div>
+</div>
