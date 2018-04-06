@@ -26,8 +26,18 @@ export class ChildComponent implements OnInit {
 
 * `ChangeDetectorRef`只能意會不能言傳
 
-
-
+## Lifecycle hook
+```
+ngOnChanges()：@Input()繫結第一次發生就會觸發
+ngOnInit()
+ngDoCheck() 
+下列前二為內容元件，後二為子元件
+  ngAfterContentInit() 
+  ngAfterContentChecked() 
+  ngAfterViewInit() 
+  ngAfterViewChecked()
+ngOnDestory()
+```
 
 
 
