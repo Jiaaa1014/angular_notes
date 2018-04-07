@@ -28,7 +28,7 @@ export class ChildComponent implements OnInit {
 
 ## Lifecycle hook
 
-```
+```js
 ngOnChanges()：@Input()繫結第一次發生就會觸發
 ngOnInit()
 ngDoCheck() 
@@ -89,7 +89,6 @@ const appRoutes = [
   exports: [RouterModule],
   declarations: []
 })
-export class AppRoutingModule { }
 ```
 
 在`header.component.ts`把`href`改成`routerLink`，在改變元素時就不需要reload
@@ -103,21 +102,33 @@ export class AppRoutingModule { }
     { path: '', component: PlaceholderComponent }
   ]
 },
-`prefix`是default值，意即將`users`作為前綴，`userId`為接下來的路徑，若改為`full`，則輸入了`user/userId`會當作不合乎`user`因此轉回首頁。
+`prefix`是default值，意即將`users`作為前綴，`userId`為接下來的路徑，若改為`full`，則輸入了`user/userId`會當作不合乎`user`關係因此轉回首頁。
 
-在`full`值下將`users`改為`users/2`，代表這個路徑指向`users`，看不到`userId`為2的人的資訊喔。
+在`full`值下將`users`改為`users/2`，代表這個路徑指向`users`，但看不到`userId`為2的人的資訊喔。
 ```
 
 
 
 ## Guard
 
-`auth.guard.ts`將兩種都改為false
-
+`auth.guard.ts`將兩種都設置為回傳false
 
 ```js
-return false
+export class AuthGuard implements CanActivate, CanActivateChild {
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return false;
+  }
+  canActivateChild(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return false
+  }
+}
 ```
+
+
 `app-routing.module.ts`
 ```js
 const appRoutes = [
@@ -134,24 +145,5 @@ const appRoutes = [
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ]
 ```
-如此一來，部落格頁面不能點選，而使用者頁面可以點選，但個別的點不了
-
-
-
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+這樣設定後，部落格頁面不能點選，而使用者頁面可以點選，但個別的(Child部分)點不了
 
