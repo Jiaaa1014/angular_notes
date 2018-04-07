@@ -1,20 +1,27 @@
 <app-header></app-header>
 <br>
 <br>
-<div class="container-fluid">
+<div class="container">
+  <!-- home/blog/users的切換 -->
   <router-outlet></router-outlet>
 </div>
-<!-- <app-chat></app-chat>
-<hr>
-<app-message-list>
-  <hr>
-  <h6>
-    以下&lt;message&gt;定義在&lt;app&gt;，&lt;ng-content&gt;要當作placeholder放在&lt;message-list&gt;
-  </h6>
+<!-- <br>
+<br>
+<div class="container">
+  <app-chat></app-chat>
   <br>
-  <app-message #designedMessage [message]="title"></app-message>
-  <app-message [message]="title"></app-message>
-  <app-message [message]="title"></app-message>
-</app-message-list>
-<hr> -->
-<!-- <app-parent></app-parent> -->
+  <br>
+  <app-message-list>
+    <hr>
+    <h6>
+      以下&lt;message&gt;定義在&lt;app&gt;，&lt;ng-content&gt;要當作placeholder放在&lt;message-list&gt;
+    </h6>
+    <br>
+    <app-message #designedMessage [message]="title"></app-message>
+    <app-message [message]="title"></app-message>
+    <app-message [message]="title"></app-message>
+  </app-message-list>
+  <br>
+  <br>
+  <app-parent></app-parent>
+</div> -->

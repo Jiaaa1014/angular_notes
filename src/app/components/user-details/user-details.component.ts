@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html'
+  selector: 'app-user-details',
+  templateUrl: './user-details.component.html'
 })
-export class UsersComponent {
+export class UserDetailsComponent implements OnInit {
+
+  user: any
   users: Array<{ id: number, name: string, email: string }> = [
     {
       'id': 1,
@@ -58,5 +61,22 @@ export class UsersComponent {
     }
   ]
 
+  constructor(private activatedRoute: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe((params) => {
+      // params.userId要放上"+"以便將string轉為number
+      this.user = this.users.filter(user => user.id === +params.userId)[0]
+    })
+    // /users/7?userName=mary&age=31，console問號之後的物件
+    /*
+    qs為
+      {
+        "userName": "mary",
+        "age": "31"
+      }
+  */
+    this.activatedRoute.queryParams.subscribe((qs) => console.log('Go to ther Qs as', qs))
+  }
 
 }

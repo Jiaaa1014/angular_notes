@@ -15,6 +15,9 @@ import { MessageComponent } from './components/message/message.component';
 import { MessageListComponent } from './components/message-list/message-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UsersComponent } from './components/users/users.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { UserComponent } from './components/user/user.component';
+import { PlaceholderComponent } from './components/placeholder/placeholder.component';
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { UsersComponent } from './components/users/users.component';
     AboutComponent,
     BlogComponent,
     HeaderComponent,
-    UsersComponent
+    UsersComponent,
+    UserDetailsComponent,
+    UserComponent,
+    PlaceholderComponent
   ],
   imports: [
     BrowserModule,
