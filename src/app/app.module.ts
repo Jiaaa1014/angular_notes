@@ -1,14 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
+import { HomeComponent } from './components/home/home.component';
+import { AboutComponent } from './components/about/about.component';
+import { BlogComponent } from './components/blog/blog.component';
 
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
-import { MessageComponent } from './components/message/message.component';
-import { MessageListComponent } from './components/message-list/message-list.component';
 import { ChildComponent } from './components/child/child.component';
 import { ParentComponent } from './components/parent/parent.component';
+import { MessageComponent } from './components/message/message.component';
+import { MessageListComponent } from './components/message-list/message-list.component';
+import { HeaderComponent } from './components/header/header.component';
+import { UsersComponent } from './components/users/users.component';
 
 
 @NgModule({
@@ -18,11 +24,17 @@ import { ParentComponent } from './components/parent/parent.component';
     MessageComponent,
     MessageListComponent,
     ChildComponent,
-    ParentComponent
+    ParentComponent,
+    HomeComponent,
+    AboutComponent,
+    BlogComponent,
+    HeaderComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
