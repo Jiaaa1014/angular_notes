@@ -95,6 +95,29 @@ export class AppRoutingModule { }
 在`header.component.ts`把`href`改成`routerLink`，在改變元素時就不需要reload
 
 
+
+```js
+{
+  path: 'users', component: UsersComponent, pathMatch:'prefix', children: [
+    { path: ':userId', component: UserDetailsComponent },
+    { path: '', component: PlaceholderComponent }
+  ]
+},
+`prefix`是default值，意即將`users`作為前綴，`userId`為接下來的路徑，若改為`full`，則輸入了`user/userId`會當作不合乎`user`因此轉回首頁。
+
+在`full`值下將`users`改為`users/2`，代表這個路徑指向`users`，看不到`userId`為2的人的資訊喔。
+
+
+
+
+
+
+
+
+
+
+
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
