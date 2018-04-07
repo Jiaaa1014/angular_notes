@@ -27,23 +27,46 @@ export class ChildComponent implements OnInit {
 * `ChangeDetectorRef`只能意會不能言傳
 
 ## Lifecycle hook
+
 ```
 ngOnChanges()：@Input()繫結第一次發生就會觸發
 ngOnInit()
 ngDoCheck() 
-下列前二為內容元件，後二為子元件
   ngAfterContentInit() 
   ngAfterContentChecked() 
   ngAfterViewInit() 
   ngAfterViewChecked()
 ngOnDestory()
 ```
+假想一個狀態：新增一個訊息，然後刪除它，依序週期為：
 
+```js
+constructor
+ ngOnChanges()
+ ngOnInit()
+ ngDoCheck()
+ ngAfterContentInit()
+ ngAfterContentChecked()
+ ngAfterViewInit()
+ ngAfterViewChecked()
+ ngDoCheck()
+ ngAfterContentChecked()
+ ngAfterViewChecked()
+```
+* 然後刪除它：
+```js
+ngDoCheck()
+ ngAfterContentChecked()
+ ngAfterViewChecked()
+ ngDestroy()
+```
 
-
-
-
-
+* 換成修改而不刪除它，ngDoCheck()裡面的四個子週期先忽略：
+```js
+ngDoCheck()
+ngOnChanges()
+ngDoCheck()
+```
 
 
 
