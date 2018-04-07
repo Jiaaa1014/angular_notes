@@ -106,14 +106,35 @@ export class AppRoutingModule { }
 `prefix`是default值，意即將`users`作為前綴，`userId`為接下來的路徑，若改為`full`，則輸入了`user/userId`會當作不合乎`user`因此轉回首頁。
 
 在`full`值下將`users`改為`users/2`，代表這個路徑指向`users`，看不到`userId`為2的人的資訊喔。
+```
 
 
 
+## Guard
+
+`auth.guard.ts`將兩種都改為false
 
 
+```js
+return false
+```
+`app-routing.module.ts`
+```js
+const appRoutes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent },
+  {
+    path: 'users', component: UsersComponent, canActivateChild: [AuthGuard], children: [
+      { path: ':userId', component: UserDetailsComponent },
+      // { path: '', component: PlaceholderComponent }
+    ]
+  },
 
-
-
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
+]
+```
+如此一來，部落格頁面不能點選，而使用者頁面可以點選，但個別的點不了
 
 
 

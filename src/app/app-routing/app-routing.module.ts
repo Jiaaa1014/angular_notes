@@ -9,14 +9,16 @@ import { UsersComponent } from '../components/users/users.component';
 import { UserDetailsComponent } from '../components/user-details/user-details.component';
 import { PlaceholderComponent } from '../components/placeholder/placeholder.component';
 
+import { AuthGuard } from '../guards/auth/auth.guard';
+
 const appRoutes = [
   { path: 'home', component: HomeComponent },
-  { path: 'blog', component: BlogComponent },
+  { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
   { path: 'about', component: AboutComponent },
   {
-    path: 'users', component: UsersComponent, children: [
+    path: 'users', component: UsersComponent, canActivateChild: [AuthGuard], children: [
       { path: ':userId', component: UserDetailsComponent },
-      { path: '', component: PlaceholderComponent }
+      // { path: '', component: PlaceholderComponent }
     ]
   },
 
@@ -24,6 +26,7 @@ const appRoutes = [
 ]
 
 @NgModule({
+  providers: [AuthGuard],
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
   declarations: []
