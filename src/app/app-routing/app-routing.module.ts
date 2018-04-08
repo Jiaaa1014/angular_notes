@@ -8,25 +8,30 @@ import { AboutComponent } from '../components/about/about.component';
 import { UsersComponent } from '../components/users/users.component';
 import { UserDetailsComponent } from '../components/user-details/user-details.component';
 import { PlaceholderComponent } from '../components/placeholder/placeholder.component';
+import { MessageListComponent } from '../components/message-list/message-list.component';
 
 import { AuthGuard } from '../guards/auth/auth.guard';
+import { ConfirmationGuard } from '../guards/confirmation/confirmation.guard';
 
 const appRoutes = [
   { path: 'home', component: HomeComponent },
   { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
   { path: 'about', component: AboutComponent },
   {
-    path: 'users', component: UsersComponent, canActivateChild: [AuthGuard], children: [
+    path: 'users',
+    component: UsersComponent,
+    canActivateChild: [AuthGuard],
+    children: [
       { path: ':userId', component: UserDetailsComponent },
       // { path: '', component: PlaceholderComponent }
     ]
   },
-
+  { path: 'messages', component: MessageListComponent, canDeactivate: [ConfirmationGuard] },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ]
 
 @NgModule({
-  providers: [AuthGuard],
+  providers: [AuthGuard, ConfirmationGuard],
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
   declarations: []

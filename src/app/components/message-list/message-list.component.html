@@ -1,4 +1,4 @@
-<div style="border:2px #eee solid; padding:10px;">
+<!-- <div style="border:2px #eee solid; padding:10px;">
   <h3>
     message-list component在這裡
   </h3>
@@ -6,4 +6,19 @@
   <br>
   <app-message *ngFor="let message of messages" [message]="message"></app-message>
   <ng-content></ng-content>
-</div>
+</div> -->
+<h5>輸入內容以新增</h5>
+<input class="form-control form-inline" type="text" (keyup.enter)="addMessage()" [(ngModel)]="message">
+<br>
+<br>
+<h3>清單</h3>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let message of messages; let i= index">
+    <app-message [message]="message.message" [index]="i" (messageDeleted)="onMessageDelete($event)"></app-message>
+  </li>
+</ul>
+<br>
+<br>
+<button class="btn btn-secondary" *ngIf="messages.length > 0" (click)="changeFirstMessage()">把第一個message改掉</button>
+<ng-content></ng-content>

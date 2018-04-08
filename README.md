@@ -111,6 +111,8 @@ const appRoutes = [
 
 ## Guard
 
+#### CanActivate
+
 `auth.guard.ts`將兩種都設置為回傳false
 
 ```js
@@ -127,8 +129,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 }
 ```
-
-
 `app-routing.module.ts`
 ```js
 const appRoutes = [
@@ -147,3 +147,54 @@ const appRoutes = [
 ```
 這樣設定後，部落格頁面不能點選，而使用者頁面可以點選，但個別的(Child部分)點不了
 
+#### CanDeactivate
+
+`confirmation.guard.ts`設置
+```js
+import { Injectable } from '@angular/core';
+import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+
+// 送去message-list.component.ts實作
+interface CanComponentDeactivate {
+  confirm(): boolean
+}
+
+
+@Injectable()
+export class ComfirmatioGuard implements CanDeactivate<CanComponentDeactivate>  {
+  canDeactivate(
+    component: CanComponentDeactivate,
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return component.confirm()
+  }
+}
+```
+`message-list.component.ts`也要設置
+```js
+export class MessageListComponent implements CanComponentDeactivate{
+ confirm() {
+    return confirm('想烙跑？')
+  }
+}
+`app-routing.module.ts`
+```js
+const appRoutes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivateChild: [AuthGuard],
+    children: [
+      { path: ':userId', component: UserDetailsComponent },
+      // { path: '', component: PlaceholderComponent }
+    ]
+  },
+  { path: 'messages', component: MessageListComponent, canDeactivate: [ConfirmationGuard] },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
+]
+```
+在根部多一個頁面`messages`，如果要離開此頁或切換的話它就會跑出`confirm()`警告
