@@ -132,9 +132,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 `app-routing.module.ts`
 ```js
 const appRoutes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
-  { path: 'about', component: AboutComponent },
   {
     path: 'users', component: UsersComponent, canActivateChild: [AuthGuard], children: [
       { path: ':userId', component: UserDetailsComponent },
@@ -159,8 +156,6 @@ import { Observable } from 'rxjs/Observable';
 interface CanComponentDeactivate {
   confirm(): boolean
 }
-
-
 @Injectable()
 export class ComfirmatioGuard implements CanDeactivate<CanComponentDeactivate>  {
   canDeactivate(
@@ -178,12 +173,10 @@ export class MessageListComponent implements CanComponentDeactivate{
     return confirm('想烙跑？')
   }
 }
+```
 `app-routing.module.ts`
 ```js
 const appRoutes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
-  { path: 'about', component: AboutComponent },
   {
     path: 'users',
     component: UsersComponent,
@@ -198,3 +191,67 @@ const appRoutes = [
 ]
 ```
 在根部多一個頁面`messages`，如果要離開此頁或切換的話它就會跑出`confirm()`警告
+
+#### Resolve
+`users-resolve.guard.ts`，哀這裡也不太清楚
+
+```js
+import { Injectable } from '@angular/core';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { IUser } from '../../interfaces/user';
+import { UserService } from '../../services/user/user.service'
+
+@Injectable()
+export class UsersResolveGuard implements Resolve<IUser[]> {
+  constructor(private userService: UserService) { }
+  resolve(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): IUser[] {
+    return this.userService.getUsers()
+  }
+}
+```
+`app-routing.module.ts`
+```js
+{
+  path: 'users',
+  component: UsersComponent,
+  // 關乎於能不能看到資訊
+  canActivateChild: [AuthGuard],
+  // resolve消失，整個users列表也消失
+  // 改成usersss也沒人管你，只是user.component.ts要對應成data.usersss
+  // UsersResolveGuard回傳this.userService.getUsers()
+  resolve: {
+    users: UsersResolveGuard
+  },
+  children: [
+    { path: ':userId', component: UserDetailsComponent },
+    // { path: '', component: PlaceholderComponent }
+  ]
+},
+```
+`users.component.ts`
+
+簡單來說它把原本this.users=this.userService.getUsers()的事情交代給上面的檔案去做，在這個檔案的職責就僅是將`activatedRoute`的資訊傳給class內的變數囉。
+```js
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router';
+
+import { IUser } from '../../interfaces/user'
+
+
+@Component({
+  selector: 'app-users',
+  templateUrl: './users.component.html'
+})
+export class UsersComponent implements OnInit {
+  users: Array<IUser>
+
+  constructor(private activatedRoute: ActivatedRoute) { }
+  ngOnInit() {
+    // 在app-routing.module.ts幫這裡得到回傳的資料，activatedRoute又是個大object裡面有許多要用到的東西
+    this.activatedRoute.data.forEach(data => { this.users = data.users })
+  }
+}
+```

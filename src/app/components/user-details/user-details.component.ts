@@ -69,6 +69,7 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
     this.users = this.userService.getUsers()
     this.activatedRoute.params.subscribe((params) => {
+      console.log(this.activatedRoute.params)
       // params.userId要放上"+"以便將string轉為number
       this.user = this.users.filter(user => user.id === +params.userId)[0]
     })

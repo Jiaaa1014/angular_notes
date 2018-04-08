@@ -12,6 +12,9 @@ import { MessageListComponent } from '../components/message-list/message-list.co
 
 import { AuthGuard } from '../guards/auth/auth.guard';
 import { ConfirmationGuard } from '../guards/confirmation/confirmation.guard';
+import { UsersResolveGuard } from '../guards/users-resolve/users-resolve.guard';
+
+import { UserService } from '../services/user/user.service';
 
 const appRoutes = [
   { path: 'home', component: HomeComponent },
@@ -21,9 +24,12 @@ const appRoutes = [
     path: 'users',
     component: UsersComponent,
     // canActivateChild: [AuthGuard],
+    resolve: {
+      users: UsersResolveGuard
+    },
     children: [
       { path: ':userId', component: UserDetailsComponent },
-      { path: '', component: PlaceholderComponent }
+      // { path: '', component: PlaceholderComponent }
     ]
   },
   { path: 'messages', component: MessageListComponent, canDeactivate: [ConfirmationGuard] },
@@ -31,7 +37,7 @@ const appRoutes = [
 ]
 
 @NgModule({
-  providers: [AuthGuard, ConfirmationGuard],
+  providers: [AuthGuard, ConfirmationGuard, UsersResolveGuard, UserService],
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
   declarations: []

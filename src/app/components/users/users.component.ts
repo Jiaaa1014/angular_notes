@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router';
 
 import { IUser } from '../../interfaces/user'
-import { UserService } from '../../services/user/user.service';
 
 
 @Component({
@@ -11,13 +11,8 @@ import { UserService } from '../../services/user/user.service';
 export class UsersComponent implements OnInit {
   users: Array<IUser>
 
-  constructor(private userService: UserService) { }
+  constructor(private activatedRoute: ActivatedRoute) { }
   ngOnInit() {
-    this.users = this.userService.getUsers()
-    console.log(this.users)
-
+    this.activatedRoute.data.forEach(data => { this.users = data.users })
   }
-
-
-
 }
