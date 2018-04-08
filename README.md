@@ -29,7 +29,7 @@ export class ChildComponent implements OnInit {
 ## Lifecycle hook
 
 ```js
-ngOnChanges()：@Input()繫結第一次發生就會觸發
+ngOnChanges()
 ngOnInit()
 ngDoCheck() 
   ngAfterContentInit() 
