@@ -19,6 +19,8 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { UserComponent } from './components/user/user.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
 
+import { UserService } from './services/user/user.service';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { PlaceholderComponent } from './components/placeholder/placeholder.compo
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

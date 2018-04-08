@@ -9,7 +9,5 @@ export class MessageComponent {
   @Input() index: number
   @Output() messageDeleted: EventEmitter<number> = new EventEmitter()
 
-  delete() {
-    this.messageDeleted.emit(this.index)
-  }
+  delete = () => this.messageDeleted.emit(this.index)
 }

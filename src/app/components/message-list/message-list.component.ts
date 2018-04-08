@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 })
 export class MessageListComponent implements CanComponentDeactivate/* OnInit, AfterViewInit*/ {
 
-  /*   @ViewChild(MessageComponent) firstMessageComponent: MessageComponent
+  /*
+    @ViewChild(MessageComponent) firstMessageComponent: MessageComponent
     @ViewChildren(MessageComponent) allMessageComponents: QueryList<MessageComponent>
-
     @ContentChild(MessageComponent) firstProjectMessComponent: MessageComponent
     @ContentChild('designedMessage') tempProjectMessComponent: MessageComponent
     @ContentChildren(MessageComponent) allProjectMessComponents: QueryList<MessageComponent>
@@ -18,22 +18,16 @@ export class MessageListComponent implements CanComponentDeactivate/* OnInit, Af
   messages: Array<{ message: string }> = []
   message: string = ''
 
-  addMessage() {
+  addMessage = () => {
     if (!this.message) { return }
     this.messages.push({ message: this.message })
     this.message = ''
   }
 
-  onMessageDelete($event) {
-    this.messages.splice($event, 1)
-  }
-  changeFirstMessage() {
-    this.messages[0].message = '改囉'
-  }
+  onMessageDelete = ($event) => this.messages.splice($event, 1)
+  changeFirstMessage = () => this.messages[0].message = '改囉'
 
-  confirm() {
-    return confirm('想烙跑？')
-  }
+  confirm = () => confirm('想烙跑？')
   /*   ngAfterViewInit() {
       // this.firstMessageComponent.message = '使用週期鉤子ngAfterViewInit改變第一個message @ViewChild'
       this.allMessageComponents.toArray().forEach(message => {

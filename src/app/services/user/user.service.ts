@@ -1,14 +1,8 @@
-import { Component } from '@angular/core'
-
+import { Injectable } from '@angular/core';
 import { IUser } from '../../interfaces/user'
-
-
-@Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html'
-})
-export class UsersComponent {
-  users: Array<IUser> = [
+@Injectable()
+export class UserService {
+  private users: IUser[] = [
     {
       'id': 1,
       'name': 'Leanne Graham',
@@ -60,6 +54,12 @@ export class UsersComponent {
       'email': 'Rey.Padberg@karina.biz',
     }
   ]
+
+  getUsers(): IUser[] {
+    return this.users
+  }
+  constructor() { }
+
 
 
 }

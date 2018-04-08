@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+
+import { IUser } from '../../interfaces/user'
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-user-details',
@@ -8,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserDetailsComponent implements OnInit {
 
   user: any
-  users: Array<{ id: number, name: string, email: string }> = [
+  users: Array<IUser> = [
     {
       'id': 1,
       'name': 'Leanne Graham',
@@ -61,9 +64,10 @@ export class UserDetailsComponent implements OnInit {
     }
   ]
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit() {
+    this.users = this.userService.getUsers()
     this.activatedRoute.params.subscribe((params) => {
       // params.userId要放上"+"以便將string轉為number
       this.user = this.users.filter(user => user.id === +params.userId)[0]
