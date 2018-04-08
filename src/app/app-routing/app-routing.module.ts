@@ -20,10 +20,10 @@ const appRoutes = [
   {
     path: 'users',
     component: UsersComponent,
-    canActivateChild: [AuthGuard],
+    // canActivateChild: [AuthGuard],
     children: [
       { path: ':userId', component: UserDetailsComponent },
-      // { path: '', component: PlaceholderComponent }
+      { path: '', component: PlaceholderComponent }
     ]
   },
   { path: 'messages', component: MessageListComponent, canDeactivate: [ConfirmationGuard] },
