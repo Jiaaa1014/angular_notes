@@ -16,14 +16,23 @@ export class UserDetailsComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      // params.userId要放上"+"以便將string轉為number
-      this.user = this.userService.getUserById(+params.userId)
-    })
-
-
-    // /users/7?userName=mary&age=31，console問號之後的物件
-    // this.activatedRoute.queryParams.subscribe((qs) => console.log('Go to ther Qs as', qs))
+    this.activatedRoute.params
+      // .toPromise().then(user => this.user = <IUser>user)
+      .subscribe(params => {
+        this.userService.getUserByIdViaREST(+params.userId).subscribe(
+          user => this.user = user,
+          err => console.log(err),
+          () => console.log('Fetch of UserDetails Completed.')
+        )
+      })
   }
-
 }
+
+/*
+  params.userId要放上"+"以便將string轉為number
+  this.user = this.userService.getUserById(+params.userId)
+*/
+/*
+  /users/7?userName=mary&age=31，console問號之後的物件
+  this.activatedRoute.queryParams.subscribe((qs) => console.log('Go to ther Qs as', qs))
+*/

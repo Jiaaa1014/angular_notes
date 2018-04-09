@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
 import { IUser } from '../../interfaces/user'
+
 @Injectable()
 export class UserService {
+
+
+  private _rootUrl: string = 'https://jsonplaceholder.typicode.com/users'
   private _users: IUser[] = [
     {
       'id': 1,
@@ -55,12 +62,20 @@ export class UserService {
     }
   ]
 
+  constructor(private http: HttpClient) { }
+  // users-resolve.guard.ts還用的到，先別刪
   getUsers(): IUser[] {
     return this._users
   }
 
+  getUsersViaREST(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(this._rootUrl)
+  }
   getUserById(id: number) {
     return this._users.filter(user => user.id === id)[0]
   }
-  constructor() { }
+
+  getUserByIdViaREST(id: number): Observable<IUser> {
+    return this.http.get<IUser>(`${this._rootUrl}/${id}`)
+  }
 }

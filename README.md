@@ -262,12 +262,41 @@ export class UsersComponent implements OnInit {
 `Provider`可以當作是食譜，這個依賴有哪些食材，最後map這些到函式工廠建立物件
 
 
+## HttpClient
 
+`app.module.ts`
+```js
+import { HttpClientModule } from '@angular/common/http';
+  ...
 
+  imports: [ HttpClientModule ],
+```
 
+`user.service.ts`
+```js
+import { HttpClient } from '@angular/common/http';
+  ...
+  constructor(private http: HttpClient) { }
+```
 
+[這篇可以參考](https://segmentfault.com/a/1190000010259536)
+上面的東西完成後，原本都是以儲存在`user.service.ts`的`uesrs`變數來丟給其他元件。
 
+現在可以直接以`http.get(url)`將值傳給需要的元件使用
+`user.service.ts`新增兩個，內容有點陌生，多看幾遍
 
+```js
+  getUsersViaREST(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(this._rootUrl)
+  }
 
+  getUserByIdViaREST(id: number): Observable<IUser> {
+    return this.http.get<IUser>(`${this._rootUrl}/${id}`)
+  }
+}
+```
 
-
+特別的是`user-details.component.html`，後面的如果沒有血會變成`[object Object]`
+```html
+ <pre>{{user.address | json}}</pre>
+```

@@ -1,5 +1,27 @@
+interface IGo {
+  lat: string,
+  lng: string,
+}
+
+interface IAddress {
+  street: string,
+  suite: string,
+  city: string,
+  zipcode: string,
+  geo: IGo
+}
+interface ICompany {
+  name: string,
+  catchPhrase: string,
+  bs: string,
+}
 export interface IUser {
   id: number,
   name: string,
-  email: string
+  username?: string,
+  email: string,
+  address?: IAddress,
+  phone?: string,
+  website?: string,
+  company?: ICompany
 }

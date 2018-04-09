@@ -1,14 +1,13 @@
+<br>
+<br>
 <div>
-  <b>
-    詳細資料：
-  </b>
-  <p>
-    User ID: {{user.id}}
-  </p>
-  <p>
-    User Name: {{user.name}}
-  </p>
-  <p>
-    User Email: {{user.email}}
-  </p>
+  <h3>詳細資料：</h3>
+  <div>User ID: {{user.id}}</div>
+  <div>User UserName: {{user.username}} </div>
+  <div>User Name: {{user.name}}</div>
+  <div>User Email: {{user.email}}</div>
+  <div>User Address
+    <br>
+    <pre>{{user.address | json}}</pre>
+  </div>
 </div>
