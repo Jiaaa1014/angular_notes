@@ -255,3 +255,19 @@ export class UsersComponent implements OnInit {
   }
 }
 ```
+
+## Injector and Provider
+
+`Injector`暴露APIs以供我們建立依賴實例
+`Provider`可以當作是食譜，這個依賴有哪些食材，最後map這些到函式工廠建立物件
+
+
+
+
+
+
+
+
+
+
+

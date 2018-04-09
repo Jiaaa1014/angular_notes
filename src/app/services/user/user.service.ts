@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IUser } from '../../interfaces/user'
 @Injectable()
 export class UserService {
-  private users: IUser[] = [
+  private _users: IUser[] = [
     {
       'id': 1,
       'name': 'Leanne Graham',
@@ -56,10 +56,11 @@ export class UserService {
   ]
 
   getUsers(): IUser[] {
-    return this.users
+    return this._users
+  }
+
+  getUserById(id: number) {
+    return this._users.filter(user => user.id === id)[0]
   }
   constructor() { }
-
-
-
 }

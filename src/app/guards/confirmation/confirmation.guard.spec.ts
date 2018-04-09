@@ -1,15 +1,15 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
-import { ComfirmatioGuard } from './comfirmatio.guard';
+import { ConfirmationGuard } from './confirmation.guard';
 
 describe('ComfirmatioGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ComfirmatioGuard]
+      providers: [ConfirmationGuard]
     });
   });
 
-  it('should ...', inject([ComfirmatioGuard], (guard: ComfirmatioGuard) => {
+  it('should ...', inject([ConfirmationGuard], (guard: ConfirmationGuard) => {
     expect(guard).toBeTruthy();
   }));
 });
