@@ -5,3 +5,9 @@ body {
     /* font-family: Noto Sans CJK SC, Source Han Sans SC, Source Han Sans CN, sans-serif; */
     letter-spacing: 2px
 }
+
+button.btn {
+    background: transparent;
+    color: #000;
+    margin: 4px;
+}

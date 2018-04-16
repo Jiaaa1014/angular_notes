@@ -1,5 +1,5 @@
 <div class="container row">
-  <div class="col-md-4">
+  <div class="col-md-5">
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let user of users">
         <a routerLink="./{{user.id}}">
@@ -8,7 +8,7 @@
       </li>
     </ul>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-7">
     <router-outlet></router-outlet>
     <!-- <app-user-details></app-user-details> -->
   </div>

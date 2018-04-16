@@ -10,4 +10,12 @@
     <br>
     <pre>{{user.address | json}}</pre>
   </div>
+  <hr>
+  <button class="btn btn-success" (click)="createUser()">建立user</button>
+  <button class="btn btn-primary" (click)="updateUser()">更新user</button>
+  <button class="btn btn-danger" (click)="deleteUser()">刪除user</button>
+  <button class="btn btn-warning" (click)="getUserPosts()">user所提供資訊</button>
 </div>
+
+<h4>Users</h4>
+<pre>{{posts | async | json}}</pre>

@@ -9,8 +9,10 @@ import { UserService } from '../../services/user/user.service';
   templateUrl: './user-details.component.html'
 })
 export class UserDetailsComponent implements OnInit {
-
-  user: IUser
+  // user: <IUser>
+  // 這種寫法，當route有參數id時會出現_co.user is undefined
+  user: any = {}
+  posts: any
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService) { }
@@ -25,6 +27,34 @@ export class UserDetailsComponent implements OnInit {
           () => console.log('Fetch of UserDetails Completed.')
         )
       })
+  }
+  createUser() {
+    this.user.id = null
+    this.userService.createUser(this.user).subscribe(
+      user => alert(`建立一個使用者，id為${user.id}`),
+      err => alert(err),
+      () => console.log('Created.')
+    )
+  }
+  updateUser() {
+    this.user.name = 'Sam Kolder'
+    this.user.email = 'Sam@gmail.com'
+    this.userService.createUser(this.user).subscribe(
+      user => alert(`更新一個使用者`),
+      err => alert(`get an error ${err}`),
+      () => console.log('Updated')
+    )
+  }
+  deleteUser() {
+    this.userService.deleteUser(this.user.id).subscribe(
+      user => alert(`刪除使用者`),
+      err => alert('wew'),
+      () => console.log('Deleted.')
+    )
+  }
+
+  getUserPosts() {
+    this.posts = this.userService.getUserPosts(this.user.id)
   }
 }
 
