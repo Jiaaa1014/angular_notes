@@ -39,7 +39,7 @@ export class UserDetailsComponent implements OnInit {
   updateUser() {
     this.user.name = 'Sam Kolder'
     this.user.email = 'Sam@gmail.com'
-    this.userService.createUser(this.user).subscribe(
+    this.userService.updateUser(this.user).subscribe(
       user => alert(`更新一個使用者`),
       err => alert(`get an error ${err}`),
       () => console.log('Updated')
@@ -48,7 +48,7 @@ export class UserDetailsComponent implements OnInit {
   deleteUser() {
     this.userService.deleteUser(this.user.id).subscribe(
       user => alert(`刪除使用者`),
-      err => alert('wew'),
+      err => alert(err),
       () => console.log('Deleted.')
     )
   }
