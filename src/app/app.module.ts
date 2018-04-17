@@ -22,6 +22,8 @@ import { UserComponent } from './components/user/user.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
 
 import { UserService } from './services/user/user.service';
+import { OneComponent } from './components/one/one.component';
+import { TwoComponent } from './components/two/two.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { UserService } from './services/user/user.service';
     UsersComponent,
     UserDetailsComponent,
     UserComponent,
-    PlaceholderComponent
+    PlaceholderComponent,
+    OneComponent,
+    TwoComponent
   ],
   imports: [
     BrowserModule,
