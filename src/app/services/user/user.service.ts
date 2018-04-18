@@ -7,6 +7,8 @@ import { IUser } from '../../interfaces/user'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/retry'
 import 'rxjs/add/operator/catch'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 @Injectable()
 export class UserService {
 
@@ -14,6 +16,7 @@ export class UserService {
   private _rootUrl: string = 'https://jsonplaceholder.typicode.com/users'
   private _rootPostsUrl: string = 'https://jsonplaceholder.typicode.com/posts'
   private _prop: string = 'foo'
+  public propChanged: BehaviorSubject<string> = new BehaviorSubject<string>(this._prop)
   private _users: IUser[] = [
     {
       'id': 1,
@@ -70,11 +73,12 @@ export class UserService {
   constructor(private http: HttpClient) { }
   // users-resolve.guard.ts還用的到，先別刪
 
-  getProps(): string {
+  getProp(): string {
     return this._prop
   }
-  setProps(prop: string): void {
+  setProp(prop: string): void {
     this._prop = prop
+    this.propChanged.next(this._prop)
   }
   getUsers(): IUser[] {
     return this._users

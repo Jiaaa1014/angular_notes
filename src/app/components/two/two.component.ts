@@ -12,8 +12,7 @@ export class TwoComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-
-    this.prop = this.userService.getProps()
+    this.userService.propChanged.subscribe(prop => this.prop = prop)
+    console.log(this.userService.propChanged)
   }
-
 }
